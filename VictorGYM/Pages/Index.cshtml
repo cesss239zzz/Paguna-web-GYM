@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+@* SECCIÓN 1: CABECERA PRINCIPAL (Estilo UNITEC Banner) *@
+<div class="gym-banner text-white p-5">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            @* Columna de Texto superpuesto *@
+            <div class="col-md-6 mb-4 mb-md-0 banner-text-container p-4">
+                <h1 class="display-3 fw-bold text-uppercase main-title">Entrena con los mejores</h1>
+                <p class="lead subtitle mb-4">Descubre tu potencial y transforma tu cuerpo en el mejor ambiente de entrenamiento.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 text-uppercase fw-bold">Ver Membresías</button>
+                    <button type="button" class="btn btn-outline-light btn-lg px-4 text-uppercase fw-bold">Clases</button>
+                </div>
+            </div>
+            @* Columna para el Logo Grande a la derecha *@
+            <div class="col-md-6 text-center text-md-end">
+                <img src="~/images/logo.png" alt="Victor's Gym Logo" class="img-fluid gym-logo-large" style="max-height: 350px;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@* SECCIÓN 2: DESCRIPCIÓN INFERIOR (Estilo UNITEC Texto inferior) *@
+<div class="container my-5 py-4 text-white">
+    <div class="row">
+        <div class="col-12">
+            <div class="p-4 rounded shadow description-box">
+                <h2 class="display-5 fw-bold text-uppercase border-bottom pb-3 mb-4" style="color: #c5a059;">Tu Transformación Empieza Aquí</h2>
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="lead">Nuestra misión es proporcionar un espacio de élite donde cada socio pueda superar sus límites. Combinamos equipo de primera, entrenadores expertos y una comunidad motivadora para asegurar tus resultados.</p>
+                        <p class="mb-0">Ya sea que busques ganar fuerza, mejorar tu salud cardiovascular o simplemente desestresarte, Victor's Gym es tu aliado estratégico.</p>
+                    </div>
+                    <div class="col-md-4 text-center mt-4 mt-md-0">
+                        <div class="stat-box p-3 rounded">
+                            <span class="display-4 fw-bold" style="color: #c5a059;">10+</span>
+                            <p class="text-uppercase fw-bold">Años de Experiencia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

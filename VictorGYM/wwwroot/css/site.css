@@ -1,0 +1,75 @@
+/* PALETA DE COLORES VICTOR'S GYM */
+:root {
+    --gym-dark: #121212;
+    --gym-gold: #c5a059; /* Ocre/Dorado del logo */
+    --gym-white: #ffffff;
+    --gym-gray: #1f1f1f;
+}
+
+body {
+    background-color: var(--gym-dark);
+    color: var(--gym-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 1. Estilos para la Cabecera Principal (Banner) */
+.gym-banner {
+    /* Imagen de fondo del gimnasio */
+    background-image: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.9)), url('/images/gym-banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 80vh; /* Ocupa la mayor parte de la altura de la pantalla */
+    display: flex;
+    align-items: center;
+}
+
+.main-title {
+    color: var(--gym-white);
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    color: #e0e0e0;
+}
+
+/* Contenedor semi-transparente para el texto sobre la imagen (estilo UNITEC) */
+.banner-text-container {
+    background-color: rgba(31, 31, 31, 0.6);
+    border-radius: 8px;
+    border-left: 5px solid var(--gym-gold); /* Línea dorada a la izquierda */
+}
+
+/* Sombra para el logo grande */
+.gym-logo-large {
+    filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.4));
+}
+
+/* 2. Botones personalizados */
+.btn-primary {
+    background-color: var(--gym-gold) !important;
+    border-color: var(--gym-gold) !important;
+    color: var(--gym-dark) !important;
+}
+
+    .btn-primary:hover {
+        background-color: #a8884c !important;
+        border-color: #a8884c !important;
+    }
+
+.btn-outline-light:hover {
+    background-color: var(--gym-gold) !important;
+    color: var(--gym-dark) !important;
+    border-color: var(--gym-gold) !important;
+}
+
+/* 3. Estilos para la Sección de Descripción Inferior */
+.description-box {
+    background-color: var(--gym-gray);
+    border: 1px solid #333;
+}
+
+.stat-box {
+    background-color: rgba(197, 160, 89, 0.1);
+    border: 2px solid var(--gym-gold);
+}
