@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor's Gym - Elite Fitness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: #FFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVEGACIÓN ESTILO GLASS */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            height: 50px;
+            width: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: #D4AF37;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFF;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+
+        /* HERO SECTION - LOGO PALPITANTE Y FACHADA */
+        #hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/images/fachada.jpg') center center/cover no-repeat fixed;
+            filter: blur(2px) brightness(0.6);
+            z-index: -1;
+        }
+
+        #hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: -1;
+        }
+
+        .hero-logo {
+            width: 500px;
+            max-width: 80vw;
+            height: auto;
+            /* Resplandor dorado total */
+            filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.8));
+            animation: logoPulse 3.5s ease-in-out infinite;
+            z-index: 10;
+            position: relative;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 45px rgba(212, 175, 55, 1));
+            }
+        }
+
+        /* SOBRE NOSOTROS */
+        #nosotros {
+            padding: 6rem 2rem;
+            background: #D4AF37;
+            color: #000;
+            text-align: center;
+        }
+
+        #nosotros h2 { font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700; }
+        #nosotros p { max-width: 800px; margin: 0 auto; font-size: 1.2rem; font-weight: 400; }
+
+        /* SERVICIOS GLASSMORPHISM */
+        #servicios {
+            padding: 6rem 2rem;
+            background-color: #000;
+            text-align: center;
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto 0;
+        }
+
+        .servicio-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: 0.4s;
+        }
+
+        .servicio-card:hover {
+            transform: translateY(-10px);
+            border-color: #D4AF37;
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.25);
+        }
+
+        .btn-servicio {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            background: #D4AF37;
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-servicio:hover { background: #FFF; transform: scale(1.05); }
+
+        /* FOOTER */
+        footer {
+            padding: 4rem 2rem;
+            background: #111;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
+        }
+
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            color: #D4AF37;
+            font-size: 2rem;
+            transition: 0.3s;
+        }
+
+        .social-link:hover { color: #FFF; transform: scale(1.2); }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hero-logo { width: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <img src="/images/logo_transparente.png" alt="Logo" class="nav-logo">
+    <ul>
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<section id="hero">
+    <img src="/images/logo_transparente.png" alt="Victor's Gym" class="hero-logo">
+</section>
+
+<section id="nosotros">
+    <h2>Sobre Nosotros</h2>
+    <p>En Victor's Gym, nos dedicamos a transformar vidas a través del fitness. Contamos con equipos de última generación para ayudarte a alcanzar tus metas en un ambiente motivador y profesional.</p>
+</section>
+
+<section id="servicios">
+    <h2 style="color: #D4AF37; font-size: 2.5rem;">Nuestros Servicios</h2>
+    <div class="servicios-grid">
+        <div class="servicio-card">
+            <h3 style="color: #D4AF37; margin-bottom: 1rem;">Entrenamiento Personal</h3>
+            <p>Puedes venir y realizar la sesión que quieras, el tiempo que quieras (una visita por día).</p>
+            <a href="https://wa.me/50488149250" class="btn-servicio" target="_blank">WhatsApp Directo</a>
+        </div>
+        <div class="servicio-card">
+            <h3 style="color: #D4AF37; margin-bottom: 1rem;">Clases Grupales</h3>
+            <p>Clases de zumba por la mañana y por la tarde.</p>
+            <span style="color: #999; font-style: italic;">Próximamente más horarios</span>
+        </div>
+        <div class="servicio-card">
+            <h3 style="color: #D4AF37; margin-bottom: 1rem;">Venta de Suplementos</h3>
+            <p>Encuentra los mejores suplementos para potenciar tu entrenamiento.</p>
+            <a href="/tienda" class="btn-servicio">Ver Tienda</a>
+        </div>
+    </div>
+</section>
+
+<footer id="contacto">
+    <h3 style="margin-bottom: 1rem;">Contáctanos</h3>
+    <p>Teléfono: +504 88149250</p>
+    <div class="social">
+        <a href="https://www.instagram.com/victorsgymcopan" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/50488149250" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+    </div>
+    <p style="color: #666; margin-top: 2rem;">© 2026 Victor's Gym. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
