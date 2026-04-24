@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - Victor's Gym</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 4px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: #FFF;
+            line-height: 1.6;
+        }
+
+        /* NAVEGACIÓN */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            height: 50px;
+            width: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex: 1;
+            margin-left: 2rem;
+        }
+
+        nav a {
+            color: #D4AF37;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #D4AF37, #FFF);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #FFF;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* HEADER */
+        .tienda-header {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1585434967173-07ffb17d3d51?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            padding: 150px 2rem 80px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .tienda-header h1 {
+            font-size: 3.5rem;
+            color: #D4AF37;
+            margin-bottom: 1rem;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        .tienda-header p {
+            font-size: 1.2rem;
+            color: #FFF;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .contenedor-tienda {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .filtros {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .filtros h3 {
+            color: #D4AF37;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* GRID DE PRODUCTOS */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .producto-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1.5px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: slideUp 1s ease-out both;
+        }
+
+        .producto-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.25);
+            border-color: rgba(212, 175, 55, 0.6);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .producto-imagen {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+        }
+
+        .producto-card:hover .producto-imagen {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
+        }
+
+        .producto-info {
+            padding: 1.5rem;
+        }
+
+        .producto-nombre {
+            color: #D4AF37;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .producto-descripcion {
+            color: #CCC;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 40px;
+        }
+
+        .producto-precio {
+            color: #FFF;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .btn-agregar {
+            width: 100%;
+            background: linear-gradient(135deg, #D4AF37, #FFF);
+            color: #000;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn-agregar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ESTADO VACÍO */
+        .productos-vacios {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .productos-vacios h2 {
+            font-size: 2rem;
+            color: #D4AF37;
+            margin-bottom: 1rem;
+        }
+
+        .productos-vacios p {
+            font-size: 1.1rem;
+            color: #CCC;
+            margin-bottom: 2rem;
+        }
+
+        .btn-volver {
+            background: linear-gradient(135deg, #D4AF37, #FFF);
+            color: #000;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+        }
+
+        .btn-volver:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(180deg, #000 0%, #1a1a1a 100%);
+            color: #D4AF37;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: #999;
+            margin: 0.5rem 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                margin-left: 0;
+            }
+
+            .tienda-header h1 {
+                font-size: 2rem;
+            }
+
+            .productos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .producto-imagen {
+                height: 200px;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav>
+        <img src="/images/logo.png" alt="Victor's Gym Logo" class="nav-logo">
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/#nosotros">Nosotros</a></li>
+            <li><a href="/#servicios">Servicios</a></li>
+            <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- HEADER -->
+    <div class="tienda-header">
+        <h1>🥤 Tienda de Suplementos</h1>
+        <p>Potencia tu entrenamiento con los mejores productos del mercado</p>
+    </div>
+
+    <!-- CONTENEDOR TIENDA -->
+    <div class="contenedor-tienda">
+        <div class="filtros">
+            <h3>Filtrar por categoría (Próximamente)</h3>
+        </div>
+
+        <!-- GRID DE PRODUCTOS VACÍO (LISTO PARA LLENAR) -->
+        <div class="productos-grid" id="productosGrid">
+            <!-- Los productos se cargarán aquí
+            
+            Estructura de ejemplo para agregar productos:
+            
+            <div class="producto-card">
+                <div class="producto-imagen">💪</div>
+                <div class="producto-info">
+                    <div class="producto-nombre">Nombre del Producto</div>
+                    <div class="producto-descripcion">Descripción breve del producto</div>
+                    <div class="producto-precio">L. 299.99</div>
+                    <button class="btn-agregar">Agregar al Carrito</button>
+                </div>
+            </div>
+            
+            -->
+        </div>
+
+        <!-- MENSAJE CUANDO NO HAY PRODUCTOS -->
+        <div class="productos-vacios" id="productosVacios">
+            <h2>🔄 Tienda en Construcción</h2>
+            <p>Estamos preparando los mejores suplementos para ti. Vuelve pronto para ver nuestro catálogo completo.</p>
+            <a href="/" class="btn-volver">Volver al Inicio</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Victor's Gym. Todos los derechos reservados.</p>
+        <p>Para consultas sobre productos, contacta: <a href="tel:+50488149250" style="color: #D4AF37;">+504 88149250</a></p>
+    </footer>
+
+    <script>
+        // Script para cargar productos dinámicamente
+        // Esta es una estructura lista para integrar con una API o base de datos
+        
+        const productosGrid = document.getElementById('productosGrid');
+        const productosVacios = document.getElementById('productosVacios');
+        
+        // Ejemplo: Función para agregar un producto
+        function agregarProductoAlGrid(nombre, descripcion, precio, icono = '🥤') {
+            const card = document.createElement('div');
+            card.className = 'producto-card';
+            card.innerHTML = `
+                <div class="producto-imagen">${icono}</div>
+                <div class="producto-info">
+                    <div class="producto-nombre">${nombre}</div>
+                    <div class="producto-descripcion">${descripcion}</div>
+                    <div class="producto-precio">L. ${precio}</div>
+                    <button class="btn-agregar" onclick="agregarCarrito('${nombre}')">Agregar al Carrito</button>
+                </div>
+            `;
+            productosGrid.appendChild(card);
+            productosVacios.style.display = 'none';
+        }
+        
+        // Función placeholder para agregar al carrito
+        function agregarCarrito(nombre) {
+            alert(`${nombre} agregado al carrito (funcionalidad pendiente)`);
+        }
+        
+        // Descomenta y modifica según tus productos reales:
+        // agregarProductoAlGrid('Proteína Whey', 'Proteína de suero de leche 1kg', '349.99', '💪');
+        // agregarProductoAlGrid('Creatina Monohidrato', 'Creatina pura 300g', '199.99', '⚡');
+        // agregarProductoAlGrid('BCAA', 'Aminoácidos ramificados', '249.99', '🏋️');
+    </script>
+</body>
+</html>
