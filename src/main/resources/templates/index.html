@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor's Gym - Elite Fitness</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Victor's Gym - Elite Fitness Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-gold: #F4E87C;
+            --dark-bg: #000000;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #FFFFFF;
+            --text-dark: #000000;
+            --shadow-gold: rgba(212, 175, 55, 0.25);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,30 +26,39 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #000;
-            color: #FFF;
+            background: var(--dark-bg);
+            color: var(--text-light);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* NAVEGACIÓN ESTILO GLASS */
+        /* Header Glassmorphism */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: none;
             z-index: 1000;
-            padding: 0.8rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         .nav-logo {
             height: 50px;
+            max-width: 150px;
             width: auto;
+            object-fit: contain;
         }
 
         nav ul {
@@ -48,18 +68,34 @@
         }
 
         nav a {
-            color: #D4AF37;
+            color: var(--primary-gold);
             text-decoration: none;
             font-weight: 600;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         nav a:hover {
-            color: #FFF;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+            color: var(--text-light);
+            text-shadow: 0 0 10px var(--shadow-gold);
         }
 
-        /* HERO SECTION - LOGO PALPITANTE Y FACHADA */
+        /* Hero Section */
         #hero {
             height: 100vh;
             position: relative;
@@ -77,9 +113,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('images/fachada.jpg') center center/cover no-repeat fixed;
-            filter: blur(2px) brightness(0.6);
-            z-index: -1;
+            background: url('images/fachada.jpg') center center/cover no-repeat;
+            background-attachment: fixed;
+            z-index: -2;
         }
 
         #hero::after {
@@ -89,93 +125,213 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%);
             z-index: -1;
         }
 
-        .hero-logo {
-            width: 500px;
-            max-width: 80vw;
-            height: auto;
-            /* Resplandor dorado total */
-            filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.8));
-            animation: logoPulse 3.5s ease-in-out infinite;
+        .hero-content {
             z-index: 10;
+            animation: titleGlow 2s ease-in-out;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--text-light);
+            text-shadow: 0 0 30px var(--primary-gold);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--secondary-gold);
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-gold);
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s ease;
             position: relative;
+            overflow: hidden;
         }
 
-        @keyframes logoPulse {
-            0%, 100% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        .hero-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px var(--shadow-gold);
+        }
+
+        @keyframes titleGlow {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+                text-shadow: 0 0 10px var(--primary-gold);
             }
-            50% {
-                transform: scale(1.05);
-                filter: drop-shadow(0 0 45px rgba(212, 175, 55, 1));
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                text-shadow: 0 0 30px var(--primary-gold);
             }
         }
 
-        /* SOBRE NOSOTROS */
+        /* About Section */
         #nosotros {
             padding: 6rem 2rem;
-            background: #D4AF37;
-            color: #000;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-gold) 100%);
+            color: var(--text-dark);
             text-align: center;
         }
 
-        #nosotros h2 { font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700; }
-        #nosotros p { max-width: 800px; margin: 0 auto; font-size: 1.2rem; font-weight: 400; }
+        #nosotros h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
 
-        /* SERVICIOS GLASSMORPHISM */
+        #nosotros p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        /* Services Section */
         #servicios {
             padding: 6rem 2rem;
-            background-color: #000;
+            background: var(--dark-bg);
             text-align: center;
+        }
+
+        #servicios h2 {
+            font-size: 3rem;
+            color: var(--primary-gold);
+            margin-bottom: 4rem;
+            font-weight: 700;
         }
 
         .servicios-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
             max-width: 1200px;
-            margin: 4rem auto 0;
+            margin: 0 auto;
         }
 
         .servicio-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 20px;
             padding: 3rem;
-            transition: 0.4s;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .servicio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .servicio-card:hover::before {
+            left: 100%;
         }
 
         .servicio-card:hover {
-            transform: translateY(-10px);
-            border-color: #D4AF37;
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.25);
+            transform: translateY(-15px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 20px 40px var(--shadow-gold);
+        }
+
+        .servicio-card h3 {
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .servicio-card p {
+            margin-bottom: 2rem;
+            color: var(--text-light);
         }
 
         .btn-servicio {
             display: inline-block;
-            margin-top: 1.5rem;
             padding: 0.8rem 1.5rem;
-            background: #D4AF37;
-            color: #000;
+            background: var(--primary-gold);
+            color: var(--text-dark);
             text-decoration: none;
             font-weight: 700;
-            border-radius: 10px;
-            transition: 0.3s;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-servicio:hover { background: #FFF; transform: scale(1.05); }
+        .btn-servicio::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
 
-        /* FOOTER */
+        .btn-servicio:hover::before {
+            left: 100%;
+        }
+
+        .btn-servicio:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px var(--shadow-gold);
+        }
+
+        /* Footer */
         footer {
             padding: 4rem 2rem;
-            background: #111;
+            background: linear-gradient(135deg, #111 0%, #000 100%);
             border-top: 1px solid rgba(212, 175, 55, 0.3);
             text-align: center;
+        }
+
+        footer h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-gold);
+            font-size: 2rem;
+        }
+
+        footer p {
+            margin-bottom: 2rem;
         }
 
         .social {
@@ -186,23 +342,48 @@
         }
 
         .social-link {
-            color: #D4AF37;
+            color: var(--primary-gold);
             font-size: 2rem;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .social-link:hover { color: #FFF; transform: scale(1.2); }
+        .social-link:hover {
+            color: var(--text-light);
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--shadow-gold);
+        }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            nav ul { display: none; }
-            .hero-logo { width: 300px; }
+            nav ul {
+                display: none;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            .servicios-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* AOS Overrides */
+        [data-aos] {
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        [data-aos].aos-animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
     </style>
 </head>
 <body>
-
-<nav>
-    <img src="images/logo_transparente.png" alt="Logo" class="nav-logo">
+<nav id="main-nav">
+    <img src="images/logo_transparente.png" alt="Victor's Gym Logo" class="nav-logo">
     <ul>
         <li><a href="#hero">Inicio</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
@@ -212,45 +393,67 @@
 </nav>
 
 <section id="hero">
-    <img src="images/logo_transparente.png" alt="Victor's Gym" class="hero-logo">
+    <div class="hero-content">
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">Victor's Gym</h1>
+        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">Elite Fitness Experience</p>
+        <a href="#servicios" class="hero-cta" data-aos="zoom-in" data-aos-delay="600">Descubre Más</a>
+    </div>
 </section>
 
-<section id="nosotros">
-    <h2>Sobre Nosotros</h2>
-    <p>En Victor's Gym, nos dedicamos a transformar vidas a través del fitness. Contamos con equipos de última generación para ayudarte a alcanzar tus metas en un ambiente motivador y profesional.</p>
+<section id="nosotros" data-aos="fade-right">
+    <h2 data-aos="fade-up" data-aos-delay="100">Sobre Nosotros</h2>
+    <p data-aos="fade-up" data-aos-delay="300">En Victor's Gym, nos dedicamos a transformar vidas a través del fitness de élite. Contamos con equipos de última generación y entrenadores profesionales para ayudarte a alcanzar tus metas en un ambiente premium y motivador.</p>
 </section>
 
 <section id="servicios">
-    <h2 style="color: #D4AF37; font-size: 2.5rem;">Nuestros Servicios</h2>
+    <h2 data-aos="fade-up">Nuestros Servicios</h2>
     <div class="servicios-grid">
-        <div class="servicio-card">
-            <h3 style="color: #D4AF37; margin-bottom: 1rem;">Entrenamiento Personal</h3>
-            <p>Puedes venir y realizar la sesión que quieras, el tiempo que quieras (una visita por día).</p>
+        <div class="servicio-card" data-aos="zoom-in" data-aos-delay="100">
+            <h3>Entrenamiento Personal</h3>
+            <p>Puedes venir y realizar la sesión que quieras, el tiempo que quieras (una visita por día). Sesiones personalizadas con nuestros expertos.</p>
             <a href="https://wa.me/50488149250" class="btn-servicio" target="_blank">WhatsApp Directo</a>
         </div>
-        <div class="servicio-card">
-            <h3 style="color: #D4AF37; margin-bottom: 1rem;">Clases Grupales</h3>
-            <p>Clases de zumba por la mañana y por la tarde.</p>
+        <div class="servicio-card" data-aos="zoom-in" data-aos-delay="300">
+            <h3>Clases Grupales</h3>
+            <p>Clases de zumba por la mañana y por la tarde. Próximamente más horarios y variedades de clases.</p>
             <span style="color: #999; font-style: italic;">Próximamente más horarios</span>
         </div>
-        <div class="servicio-card">
-            <h3 style="color: #D4AF37; margin-bottom: 1rem;">Venta de Suplementos</h3>
-            <p>Encuentra los mejores suplementos para potenciar tu entrenamiento.</p>
-            <a href="/tienda" class="btn-servicio">Ver Tienda</a>
+        <div class="servicio-card" data-aos="zoom-in" data-aos-delay="500">
+            <h3>Venta de Suplementos</h3>
+            <p>Encuentra los mejores suplementos premium para potenciar tu entrenamiento y resultados.</p>
+            <a href="tienda.html" class="btn-servicio">Ver Tienda</a>
         </div>
     </div>
 </section>
 
-<footer id="contacto">
-    <h3 style="margin-bottom: 1rem;">Contáctanos</h3>
+<footer id="contacto" data-aos="fade-up">
+    <h3>Contáctanos</h3>
     <p>Teléfono: +504 88149250</p>
     <div class="social">
-        <a href="https://www.instagram.com/victorsgymcopan" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/50488149250" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/victorsgymcopan" class="social-link" target="_blank" data-aos="fade-up" data-aos-delay="100"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/50488149250" class="social-link" target="_blank" data-aos="fade-up" data-aos-delay="200"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-link" data-aos="fade-up" data-aos-delay="300"><i class="fab fa-facebook"></i></a>
     </div>
     <p style="color: #666; margin-top: 2rem;">© 2026 Victor's Gym. Todos los derechos reservados.</p>
 </footer>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('main-nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
+</script>
 </body>
 </html>
